@@ -1,33 +1,147 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, user-scalable=no" />
-    <!-- turn off pinch zoom https://stackoverflow.com/questions/37379694/javascript-how-to-stop-pinch-zoom-multi-touch-input-attacks -->
-    <link rel="stylesheet" href="inputstyle.css" />
-    <title>HW2 SSUI</title>
-  </head>
-  <!-- you should not need to edit this fine for HW2, except to test different numbers of div's-->
-  <body>
-    <!-- your code should work for any number of divs -->
-    <div id="workspace">
-      <div
-        class="target"
-        style="top: 120px; left: 20px; width: 60px; height: 100px"
-      ></div>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-      <div
-        class="target"
-        style="top: 250px; left: 50px; width: 150px; height: 80px"
-      ></div>
+  <title>SSUI HW1 - Home</title>
 
-      <div
-        class="target"
-        style="top: 370px; left: 30px; width: 100px; height: 100px"
-      ></div>
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Catamaran:wght@200;500&family=Open+Sans&display=swap" rel="stylesheet">
+
+  <!-- Your CSS Code -->
+  <link rel="stylesheet" type="text/css" href="style.css">
+
+  <!-- JSON Shirt Object -->
+  <script src="shirts.js"></script>
+
+  <!-- Your JS Code -->
+  <script src="main.js"></script>
+</head>
+<body>
+  <div class="red">
+          
+  </div>
+  
+    <header>
+      <a href="index.html">
+        <div class="logo">
+          <img src="site_images/logo.png" alt="image_description">
+        </div>
+      </a>
+        
+          
+        <div class="headerTitle">
+          <p>Scotty Shirts U Illustrate(SSUI)</p>
+        </div>
+        <div class="shoppingCarStyle">
+          <button class="shoppingCar" onclick="location.href='not_implemented.html'" >
+            
+            <img src="site_images/shopping-cart.svg" alt="image_description"  class="car">
+              <p>0</p>
+            
+          </button>
+        </div>
+        
+    </header>
+  
+  
+  <hr>
+      <h1>
+        <div class="h1text">
+          <p>
+            <a href="products.html" class="my-redlink">
+              T-SHIRTS
+            </a>
+          </p>
+        </div>
+        <div class="h1text">
+          <p>
+            <a href="not_implemented.html" class="my-redlink">
+              CREATE FROM PICTURE
+            </a>
+          </p>
+        </div>
+        <div class="h1text">
+          <p>
+            <a href="hw2/index.html" class="my-redlink">
+              CREATE YOUR OWN
+            </a>
+          </p>
+        </div>
+        <div class="h1text">
+          <p>
+            <a href="not_implemented.html" class="my-redlink">
+              ABOUT US
+            </a>
+          </p>
+        </div>
+        <div class="h1text">
+          <p>
+            <a href="not_implemented.html" class="my-redlink">
+              LOG IN
+            </a>
+          </p>
+        </div>
+    
+    
+      </h1>
+  <img src="site_images/home.png" alt="image_description" id="theShirts">
+  <div class="section">
+      <section id="one">
+      <h2>We don't ship. We're not real</h2>
+      <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Soluta voluptatibus dolores quidem totam esse aliquid possimus, explicabo quaerat dolor veniam odio, cumque illum ipsa. Assumenda quam ab reiciendis magni accusamus!</p>
+    </section>
+    <section id="two">
+      <h2>Decide your own shirt! But help us do that...</h2>
+      <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Soluta voluptatibus dolores quidem totam esse aliquid possimus, explicabo quaerat dolor veniam odio, cumque illum ipsa. Assumenda quam ab reiciendis magni accusamus!</p>
+    </section>
+  </div>
+  <footer>
+    <div class="footerStyle">
+      <div class="footerText">
+        <p>
+          <a href="not_implemented.html" class="my-link">
+            Contact Us
+          </a>
+        </p>
+      </div>
+      <div class="footerText">
+        <p>
+          <a href="not_implemented.html" class="my-link">
+            Site Map
+          </a>
+        </p>
+      </div>
+      <div class="footerText">
+        <p>
+          <a href="not_implemented.html" class="my-link">
+            Privacy Policy
+          </a>
+        </p>
+      </div>
+      <div class="footerText">
+        <p>
+          <a href="not_implemented.html" class="my-link">
+            Careers
+          </a>
+        </p>
+      </div>
+      <div class="footerText">
+        <p>
+          <a href="not_implemented.html" class="my-link">
+            Reviews
+          </a>
+        </p>
+      </div>
+      <div class="footerText">
+        <p>
+          Designed by Jacky
+        </p>
+      </div>
     </div>
+  </footer>
+  
 
-    <!-- script -->
-    <script src="input.js"></script>
-  </body>
+</body>
 </html>

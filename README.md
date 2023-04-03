@@ -1,3 +1,5 @@
-[![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-8d59dc4de5201274e310e4c54b9627a8934c3b88527886e3b421487c677d23eb.svg)](https://classroom.github.com/a/vtMjwcap)
-# hw2-handling-input-events
-This is the starter code of [2023-Programming User Interface Homework](https://hackmd.io/@akairisu/HkUibgmx3)
+# hw1-Html-CSS-and-JavaScript
+- 姓名: 鍾昀諺
+- 實作: 在URL上輸入index.html的絕對路徑
+- 加分項目: 無
+- 有趣之處: 無
