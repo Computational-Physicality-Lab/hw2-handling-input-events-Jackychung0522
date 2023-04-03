@@ -415,6 +415,14 @@ const State = {
       }
     }
   }
+  function handleGlobalTouchEnd(event) {
+    if (!event.touches[0].classList.contains("target") ){
+      for (const div of divs) {
+        div.setColor('red');
+        div.setState(State.IDLE);
+      }
+    }
+  }
   
   function handleKeyDown(event) {
     if (event.key === 'Escape') {
@@ -432,6 +440,7 @@ const State = {
   
   // Add event listeners
   window.addEventListener('mousedown', handleGlobalMouseDown);
+  windows.addEventListener('touchend', handleGlobalTouchEnd);
   window.addEventListener('keydown', handleKeyDown);
   
                     
