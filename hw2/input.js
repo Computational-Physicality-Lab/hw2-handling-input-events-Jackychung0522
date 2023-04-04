@@ -265,7 +265,6 @@ const State = {
   
     setState(state) {
       this.state = state;
-      console.log(state);
     }
   
     handleMouseDown(event) {
@@ -357,7 +356,7 @@ const State = {
         }
       }
       handleTouchStart(event) {
-        
+        event.preventDefault();
         if (this.state === State.IDLE) {
           for (const div of divs) {
             div.setColor('red');
@@ -368,16 +367,17 @@ const State = {
           this.setState(State.SELECTED);
         }
     
-        if (event.target == this.element) {
+        
           this.originalPos = {
             x: event.touches[0].clientX,
             y: event.touches[0].clientY,
             top: this.element.offsetTop,
             left: this.element.offsetLeft,
           };
+          this.isDragging=true;
           this.setState(State.DRAGGING);
         }
-      }
+      
       handleTouchMove(event) {
         event.preventDefault();
       
@@ -390,9 +390,14 @@ const State = {
       }
       
       handleTouchEnd(event) {
+        event.preventDefault();
         if (this.state == State.DRAGGING) {
           this.isDragging = false;
           this.setState(State.IDLE);
+          const dx = event.touches[0].clientX - this.originalPos.x;
+          const dy = event.touches[0].clientY - this.originalPos.y;
+          this.element.style.top = `${this.originalPos.top + dy}px`;
+          this.element.style.left = `${this.originalPos.left + dx}px`;
         }
       }
     }
@@ -415,14 +420,14 @@ const State = {
       }
     }
   }
-  function handleGlobalTouchEnd(event) {
-    if (!event.touches[0].classList.contains("target") ){
-      for (const div of divs) {
-        div.setColor('red');
-        div.setState(State.IDLE);
-      }
-    }
-  }
+//   function handleGlobalTouchEnd(event) {
+//     if (!event.touches[0].classList.contains("target") ){
+//       for (const div of divs) {
+//         div.setColor('red');
+//         div.setState(State.IDLE);
+//       }
+//     }
+//   }
   
   function handleKeyDown(event) {
     if (event.key === 'Escape') {
@@ -440,7 +445,7 @@ const State = {
   
   // Add event listeners
   window.addEventListener('mousedown', handleGlobalMouseDown);
-  window.addEventListener('touchend', handleGlobalTouchEnd);
+  //window.addEventListener('touchend', handleGlobalTouchEnd);
   window.addEventListener('keydown', handleKeyDown);
   
                     
