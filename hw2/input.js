@@ -248,13 +248,13 @@ const State = {
       this.originalPos = null;
       this.isDragging = false;
       this.following = false;
-      element.addEventListener('mousedown', this.handleMouseDown.bind(this));
+      this.lastTouch=null;
       element.addEventListener('mousedown', this.handleMouseDown.bind(this));
         element.addEventListener('mousemove', this.handleMouseMove.bind(this));
         element.addEventListener('mouseup', this.handleMouseUp.bind(this));
-        element.addEventListener('touchstart', this.handleMouseDown.bind(this));
-        element.addEventListener('touchmove', this.handleMouseMove.bind(this));
-        element.addEventListener('touchend', this.handleMouseUp.bind(this));
+        element.addEventListener('touchstart', this.handleTouchStart.bind(this));
+        element.addEventListener('touchmove', this.handleTouchMove.bind(this));
+        element.addEventListener('touchend', this.handleTouchEnd.bind(this));
         element.addEventListener('dblclick', this.handleDoubleClick.bind(this));
     }
   
@@ -320,6 +320,7 @@ const State = {
         const dy = event.clientY - this.originalPos.y;
         this.element.style.top = `${this.originalPos.top + dy}px`;
         this.element.style.left = `${this.originalPos.left + dx}px`;
+
       }
       if (this.state === State.FOLLOWING) {
         const dx = event.clientX - this.originalPos.x;
@@ -364,31 +365,35 @@ const State = {
       }
       handleTouchStart(event) {
         event.preventDefault();
-        if (this.state === State.IDLE) {
-          for (const div of divs) {
-            div.setColor('red');
-            div.setState(State.IDLE);
-          }
-    
-          this.setColor('blue');
-          this.setState(State.SELECTED);
-          console.log(this.state);
+        
+        //document.body.addEventListener('touchmove', this.handleTouchMove.bind(this), { passive: false });
+        if(event.touches.length==1){
+            this.lastTouch = event.touches[0];
+            if (this.state === State.IDLE) {
+            for (const div of divs) {
+                div.setColor('red');
+                div.setState(State.IDLE);
+            }
+        
+            this.setColor('blue');
+            this.setState(State.SELECTED);
+            console.log(this.state);
+            }
+        
+            
+            this.originalPos = {
+                x: event.touches[0].clientX,
+                y: event.touches[0].clientY,
+                top: this.element.offsetTop,
+                left: this.element.offsetLeft,
+            };
+            this.isDragging=true;
+            this.setState(State.DRAGGING);
+            console.log(this.state);
         }
-    
-        if (event.touches[0] == this.element) {
-          this.originalPos = {
-            x: event.touches[0].clientX,
-            y: event.touches[0].clientY,
-            top: this.element.offsetTop,
-            left: this.element.offsetLeft,
-          };
-          this.isDragging=true;
-          this.setState(State.DRAGGING);
-          console.log(this.state);
-        }
-      }
+    }
       handleTouchMove(event) {
-        event.preventDefault();
+        //event.preventDefault();
       
         if (this.state == State.DRAGGING) {
           const dx = event.touches[0].clientX - this.originalPos.x;
@@ -396,6 +401,13 @@ const State = {
           this.element.style.top = `${this.originalPos.top + dy}px`;
           this.element.style.left = `${this.originalPos.left + dx}px`;
         }
+        else if (event.touches.length > 1 && this.state == State.DRAGGING) { // 判斷另一隻手指觸碰的情況
+            this.isDragging = false;
+            this.element.style.top = `${this.originalPos.top}px`;
+            this.element.style.left = `${this.originalPos.left}px`;
+            this.setState(State.IDLE);
+            this.setColor('red');
+          }
       }
       
       handleTouchEnd(event) {
@@ -405,6 +417,7 @@ const State = {
           this.setState(State.IDLE);
           console.log(this.state);
         }
+        //document.body.removeEventListener('touchmove', this.handleTouchMove.bind(this), { passive: false });
       }
     }
   
@@ -427,15 +440,15 @@ const State = {
       }
     }
   }
-  function handleGlobalTouchEnd(event) {
-    if (!event.touches[0].classList.contains("target") ){
-      for (const div of divs) {
-        div.setColor('red');
-        div.setState(State.IDLE);
-        console.log(this.state);
-      }
-    }
-  }
+//   function handleGlobalTouchEnd(event) {
+//     if (!event.touches[0].classList.contains("target") ){
+//       for (const div of divs) {
+//         div.setColor('red');
+//         div.setState(State.IDLE);
+//         console.log(this.state);
+//       }
+//     }
+//   }
   
   function handleKeyDown(event) {
     if (event.key === 'Escape') {
@@ -453,7 +466,7 @@ const State = {
   
   // Add event listeners
   window.addEventListener('mousedown', handleGlobalMouseDown);
-  window.addEventListener('touchend', handleGlobalTouchEnd);
+  //window.addEventListener('touchend', handleGlobalTouchEnd);
   window.addEventListener('keydown', handleKeyDown);
   
                     
