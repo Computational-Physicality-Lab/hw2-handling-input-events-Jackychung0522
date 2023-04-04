@@ -426,6 +426,7 @@ const State = {
             var newWidth = this.initialWidth + x2 - x1;
             console.log(this.initialWidth);
             this.element.style.width = newWidth + 'px';
+            this.element.style.left=this.element.offsetLeft+(x1-x2)/2;
           }
         if (this.state == State.DRAGGING && event.touches.length == 1){
           const dx = event.touches[0].clientX - this.originalPos.x;
