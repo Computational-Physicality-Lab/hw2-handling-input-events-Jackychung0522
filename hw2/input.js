@@ -395,13 +395,14 @@ const State = {
       handleTouchMove(event) {
         //event.preventDefault();
       
-        if (this.state == State.DRAGGING) {
+        if (this.state == State.DRAGGING && event.touches.length == 1){
           const dx = event.touches[0].clientX - this.originalPos.x;
           const dy = event.touches[0].clientY - this.originalPos.y;
           this.element.style.top = `${this.originalPos.top + dy}px`;
           this.element.style.left = `${this.originalPos.left + dx}px`;
+
         }
-        if (event.touches.length > 1 && this.state == State.DRAGGING) { 
+        else if (event.touches.length > 1 && this.state == State.DRAGGING) { 
             this.isDragging = false;
             this.element.style.top = `${this.originalPos.top}px`;
             this.element.style.left = `${this.originalPos.left}px`;
