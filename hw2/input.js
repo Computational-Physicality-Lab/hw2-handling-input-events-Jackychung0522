@@ -440,7 +440,7 @@ const State = {
   
   // Add event listeners
   window.addEventListener('mousedown', handleGlobalMouseDown);
-  windows.addEventListener('touchend', handleGlobalTouchEnd);
+  window.addEventListener('touchend', handleGlobalTouchEnd);
   window.addEventListener('keydown', handleKeyDown);
   
                     
