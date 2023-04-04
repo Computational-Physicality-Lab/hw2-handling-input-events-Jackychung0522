@@ -388,6 +388,7 @@ const State = {
             
             x1 = event.touches[0].clientX;
             initialWidth = parseInt(document.defaultView.getComputedStyle(resizeableDiv,null).getPropertyValue("width"));
+            console.log(x1);
           }   
         //document.body.addEventListener('touchmove', this.handleTouchMove.bind(this), { passive: false });
             if(event.touches.length==1 && this.state!=State.FOLLOWING){
@@ -420,8 +421,9 @@ const State = {
         event.preventDefault();
         if (event.touches.length == 2 &&this.element.initialWidth !== null) {
             x2 = e.touches[1].clientX;
+            console.log(x2);
             var newWidth = this.initialWidth + x2 - x1;
-            
+            console.log(this.initialWidth);
             this.element.style.width = newWidth + 'px';
           }
         if (this.state == State.DRAGGING && event.touches.length == 1){
