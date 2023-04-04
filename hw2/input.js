@@ -238,8 +238,7 @@ const State = {
     DRAGGING: 'dragging',
     FOLLOWING: 'following',
   };
-  var initialDistance = null;
-    var initialWidth = null;
+  var x1,x2
   // Define Div class
   class Div {
     constructor(element) {
@@ -251,6 +250,7 @@ const State = {
       this.isfollowing = false;
       this.lastTouch=null;
       this.lastTap = 0;
+      this.initialDistance=0;
       element.addEventListener('mousedown', this.handleMouseDown.bind(this));
         element.addEventListener('mousemove', this.handleMouseMove.bind(this));
         element.addEventListener('mouseup', this.handleMouseUp.bind(this));
@@ -386,8 +386,8 @@ const State = {
         this.lastTap = now;
         if (event.touches.length == 2) {
             
-            initialDistance = Math.hypot(event.touches[0].clientX - event.touches[1].clientX, event.touches[0].clientY - event.touches[1].clientY);
-            initialWidth = this.element.offsetWidth;
+            x1 = event.touches[0].clientX;
+            initialWidth = parseInt(document.defaultView.getComputedStyle(resizeableDiv,null).getPropertyValue("width"));
           }   
         //document.body.addEventListener('touchmove', this.handleTouchMove.bind(this), { passive: false });
             if(event.touches.length==1 && this.state!=State.FOLLOWING){
@@ -418,13 +418,11 @@ const State = {
     
       handleTouchMove(event) {
         event.preventDefault();
-        if (event.touches.length == 2 && initialDistance !== null && initialWidth !== null) {
+        if (event.touches.length == 2 &&this.element.initialWidth !== null) {
+            x2 = e.touches[1].clientX;
+            var newWidth = this.initialWidth + x2 - x1;
             
-            var currentDistance = Math.hypot(event.touches[0].clientX - event.touches[1].clientX, event.touches[0].clientY - event.touches[1].clientY);
-            var distanceChange = currentDistance - initialDistance;
-            
-            // 将距离变化量应用于 div 的宽度
-            this.element.style.width = initialWidth + distanceChange + 'px';
+            this.element.style.width = newWidth + 'px';
           }
         if (this.state == State.DRAGGING && event.touches.length == 1){
           const dx = event.touches[0].clientX - this.originalPos.x;
@@ -457,8 +455,8 @@ const State = {
           this.setState(State.IDLE);
           console.log(this.state);
         }
-        initialDistance = null;
-        initialWidth = null;
+        
+        this.initialWidth = null;
         // if (this.state == State.FOLLOWING) {
         //     this.isFollowing = false;
         //     this.setState(State.IDLE);
