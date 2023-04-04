@@ -406,7 +406,8 @@ const State = {
             this.element.style.top = `${this.originalPos.top}px`;
             this.element.style.left = `${this.originalPos.left}px`;
             this.setState(State.IDLE);
-            //this.setColor('red');
+            console.log("two");
+                        //this.setColor('red');
           }
       }
       
