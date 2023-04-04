@@ -275,20 +275,24 @@ const State = {
         for (const div of divs) {
           div.setColor('red');
           div.setState(State.IDLE);
+          console.log(this.state);
         }
         
        
         if(this.color=='red '&&this.state==State.DRAGGING){
             this.setColor('red');
             this.setState(State.SELECTED);
+            console.log(this.state);
         }
         else if(this.color=='blue'&&this.state==State.DRAGGING){
             this.setColor('blue');
             this.setState(State.SELECTED);
+            console.log(this.state);
         }
         else{
             this.setColor('blue');
             this.setState(State.SELECTED);
+            console.log(this.state);
         }
       }
       if (event.target === this.element) {
@@ -300,6 +304,7 @@ const State = {
           left: this.element.offsetLeft,
         };
         this.setState(State.DRAGGING);
+        console.log(this.state);
         //element.addEventListener('click', this.handleClick.bind(this));
     
       }
@@ -328,6 +333,7 @@ const State = {
       if (this.state === State.DRAGGING) {
         this.isDragging = false;
         this.setState(State.IDLE);
+        console.log(this.state);
         //window.removeEventListener('mousemove', this.handleMouseMove.bind(this));
         //window.removeEventListener('mouseup', this.handleMouseUp.bind(this));
       }
@@ -341,6 +347,7 @@ const State = {
             left: this.element.offsetLeft,
           };
           this.setState(State.FOLLOWING);
+          console.log(this.state);
           this.isFollowing = true;
           window.addEventListener('mousemove', this.handleMouseMove.bind(this));
           window.addEventListener('mouseup', this.handleMouseUpFollowing.bind(this));
@@ -365,9 +372,10 @@ const State = {
     
           this.setColor('blue');
           this.setState(State.SELECTED);
+          console.log(this.state);
         }
     
-        
+        if (event.touches[0] == this.element) {
           this.originalPos = {
             x: event.touches[0].clientX,
             y: event.touches[0].clientY,
@@ -376,8 +384,9 @@ const State = {
           };
           this.isDragging=true;
           this.setState(State.DRAGGING);
+          console.log(this.state);
         }
-      
+      }
       handleTouchMove(event) {
         event.preventDefault();
       
@@ -394,10 +403,7 @@ const State = {
         if (this.state == State.DRAGGING) {
           this.isDragging = false;
           this.setState(State.IDLE);
-          const dx = event.touches[0].clientX - this.originalPos.x;
-          const dy = event.touches[0].clientY - this.originalPos.y;
-          this.element.style.top = `${this.originalPos.top + dy}px`;
-          this.element.style.left = `${this.originalPos.left + dx}px`;
+          console.log(this.state);
         }
       }
     }
@@ -417,17 +423,19 @@ const State = {
       for (const div of divs) {
         div.setColor('red');
         div.setState(State.IDLE);
+        console.log(this.state);
       }
     }
   }
-//   function handleGlobalTouchEnd(event) {
-//     if (!event.touches[0].classList.contains("target") ){
-//       for (const div of divs) {
-//         div.setColor('red');
-//         div.setState(State.IDLE);
-//       }
-//     }
-//   }
+  function handleGlobalTouchEnd(event) {
+    if (!event.touches[0].classList.contains("target") ){
+      for (const div of divs) {
+        div.setColor('red');
+        div.setState(State.IDLE);
+        console.log(this.state);
+      }
+    }
+  }
   
   function handleKeyDown(event) {
     if (event.key === 'Escape') {
@@ -445,7 +453,7 @@ const State = {
   
   // Add event listeners
   window.addEventListener('mousedown', handleGlobalMouseDown);
-  //window.addEventListener('touchend', handleGlobalTouchEnd);
+  window.addEventListener('touchend', handleGlobalTouchEnd);
   window.addEventListener('keydown', handleKeyDown);
   
                     
