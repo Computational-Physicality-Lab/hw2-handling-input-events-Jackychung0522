@@ -238,7 +238,8 @@ const State = {
     DRAGGING: 'dragging',
     FOLLOWING: 'following',
   };
-  
+  var initialDistance = null;
+    var initialWidth = null;
   // Define Div class
   class Div {
     constructor(element) {
@@ -247,8 +248,9 @@ const State = {
       this.state = State.IDLE;
       this.originalPos = null;
       this.isDragging = false;
-      this.following = false;
+      this.isfollowing = false;
       this.lastTouch=null;
+      this.lastTap = 0;
       element.addEventListener('mousedown', this.handleMouseDown.bind(this));
         element.addEventListener('mousemove', this.handleMouseMove.bind(this));
         element.addEventListener('mouseup', this.handleMouseUp.bind(this));
@@ -366,35 +368,64 @@ const State = {
       handleTouchStart(event) {
         event.preventDefault();
         
-        //document.body.addEventListener('touchmove', this.handleTouchMove.bind(this), { passive: false });
-        if(event.touches.length==1){
-            this.lastTouch = event.touches[0];
-            if (this.state === State.IDLE) {
-            for (const div of divs) {
-                div.setColor('red');
-                div.setState(State.IDLE);
-            }
-        
-            this.setColor('blue');
-            this.setState(State.SELECTED);
-            console.log(this.state);
-            }
-        
-            
+        const now = new Date().getTime();
+        if(now-this.lastTap<300){
+            this.setState(State.FOLLOWING);
+            this.isfollowing=true;
             this.originalPos = {
-                x: event.touches[0].clientX,
-                y: event.touches[0].clientY,
-                top: this.element.offsetTop,
-                left: this.element.offsetLeft,
-            };
-            this.isDragging=true;
-            this.setState(State.DRAGGING);
-            console.log(this.state);
+                x: event.touches[0].clientX - this.element.offsetWidth / 2 ,
+                y: event.touches[0].clientY - this.element.offsetWidth / 2,
+                top: this.originalPos.y + "px",
+                left: this.originalPos.x + "px"
+              };
+            console.log("following");
+            window.addEventListener('touchmove', this.handleTouchMove.bind(this));
+            window.addEventListener('touchend', this.handleTouchEnd.bind(this));
+           
+    } 
+        this.lastTap = now;
+        if (event.touches.length == 2) {
+            
+            initialDistance = Math.hypot(event.touches[0].clientX - event.touches[1].clientX, event.touches[0].clientY - event.touches[1].clientY);
+            initialWidth = this.element.offsetWidth;
+          }   
+        //document.body.addEventListener('touchmove', this.handleTouchMove.bind(this), { passive: false });
+            if(event.touches.length==1 && this.state!=State.FOLLOWING){
+                this.lastTouch = event.touches[0];
+                if (this.state === State.IDLE) {
+                for (const div of divs) {
+                    div.setColor('red');
+                    div.setState(State.IDLE);
+                }
+            
+                this.setColor('blue');
+                this.setState(State.SELECTED);
+                console.log(this.state);
+                }
+            
+                
+                this.originalPos = {
+                    x: event.touches[0].clientX,
+                    y: event.touches[0].clientY,
+                    top: this.element.offsetTop,
+                    left: this.element.offsetLeft,
+                };
+                this.isDragging=true;
+                this.setState(State.DRAGGING);
+                console.log(this.state);
+            }
         }
-    }
+    
       handleTouchMove(event) {
-        //event.preventDefault();
-      
+        event.preventDefault();
+        if (event.touches.length == 2 && initialDistance !== null && initialWidth !== null) {
+            
+            var currentDistance = Math.hypot(event.touches[0].clientX - event.touches[1].clientX, event.touches[0].clientY - event.touches[1].clientY);
+            var distanceChange = currentDistance - initialDistance;
+            
+            // 将距离变化量应用于 div 的宽度
+            this.element.style.width = initialWidth + distanceChange + 'px';
+          }
         if (this.state == State.DRAGGING && event.touches.length == 1){
           const dx = event.touches[0].clientX - this.originalPos.x;
           const dy = event.touches[0].clientY - this.originalPos.y;
@@ -402,12 +433,19 @@ const State = {
           this.element.style.left = `${this.originalPos.left + dx}px`;
 
         }
-        else if (event.touches.length > 1 && this.state == State.DRAGGING) { 
+        // else if(this.state == State.FOLLOWING ){
+        //     const dx = event.touches[0].clientX- this.originalPos.x;
+        //     const dy = event.touches[0].clientY- this.originalPos.y;
+        //     this.element.style.top = event.touches[0].clientY - this.element.offsetHeight / 2 + "px";
+        //     this.element.style.left = event.touches[0].clientX - this.element.offsetWidth / 2 + "px";
+        // }
+        else if (event.touches.length > 1 && (this.state == State.DRAGGING ) ){ 
             this.isDragging = false;
+            this.following=false;
             this.element.style.top = `${this.originalPos.top}px`;
             this.element.style.left = `${this.originalPos.left}px`;
             this.setState(State.IDLE);
-            console.log("two");
+            //console.log("two");
                         //this.setColor('red');
           }
       }
@@ -419,6 +457,13 @@ const State = {
           this.setState(State.IDLE);
           console.log(this.state);
         }
+        initialDistance = null;
+        initialWidth = null;
+        // if (this.state == State.FOLLOWING) {
+        //     this.isFollowing = false;
+        //     this.setState(State.IDLE);
+        //     console.log(this.state);
+        //   }
         //document.body.removeEventListener('touchmove', this.handleTouchMove.bind(this), { passive: false });
       }
     }
