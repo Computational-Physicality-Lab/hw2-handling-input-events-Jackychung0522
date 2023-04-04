@@ -401,12 +401,12 @@ const State = {
           this.element.style.top = `${this.originalPos.top + dy}px`;
           this.element.style.left = `${this.originalPos.left + dx}px`;
         }
-        else if (event.touches.length > 1 && this.state == State.DRAGGING) { // 判斷另一隻手指觸碰的情況
+        if (event.touches.length > 1 && this.state == State.DRAGGING) { 
             this.isDragging = false;
             this.element.style.top = `${this.originalPos.top}px`;
             this.element.style.left = `${this.originalPos.left}px`;
             this.setState(State.IDLE);
-            this.setColor('red');
+            //this.setColor('red');
           }
       }
       
