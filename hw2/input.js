@@ -284,7 +284,7 @@ const State = {
           }
         if (event.touches.length >=3 && (this.state == State.RESIZE ) ){ 
             this.setState(State.IDLE);
-            this.element.style.transform=`scaleX(${this.lastScalex})`;
+            this.element.style.transform=`scaleX(1)`;
             console.log(event.touches.length);
             this.lastScalex=this.scalex;
             console.log("lsatS:"+this.lastScalex);
@@ -304,7 +304,7 @@ const State = {
         }
         if(this.state==State.RESIZE && event.touches.length < 2){
             this.state=State.IDLE;
-            this.lastScalex=this.scalex;
+            //this.lastScalex=this.scalex;
             console.log("lsatS:"+this.lastScalex);
             //this.element.style.width=this.element.style.width*this.scalex;
             console.log(this.state);
