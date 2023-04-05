@@ -281,13 +281,7 @@ const State = {
             //console.log("two");
                         //this.setColor('red');
           }
-          else if (event.touches.length >=3 && (this.state == State.RESIZE ) ){ 
-            
-            this.element.style.transform=`scaleX(1)`
-            this.setState(State.IDLE);
-            //console.log("two");
-                        //this.setColor('red');
-          }
+          
       }
       
       handleTouchEnd(event) {
@@ -302,6 +296,15 @@ const State = {
             //this.element.style.width=this.element.style.width*this.scalex;
             console.log(this.state);
         }
+        else if (event.touches.length >=3 && (this.state == State.RESIZE ) ){ 
+            this.setState(State.IDLE);
+            this.scalex=1;
+            this.element.style.transform=`scaleX(${this.scalex})`;
+            console.log(event.touches.length);
+            
+            //console.log("two");
+                        //this.setColor('red');
+          }
         
         if (this.state == State.FOLLOWING) {
             this.isFollowing = false;
