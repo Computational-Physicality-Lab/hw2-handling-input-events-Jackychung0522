@@ -240,12 +240,16 @@ const State = {
   };
   var x1,x2
   // Define Div class
+  
   class Div {
     constructor(element) {
       this.element = element;
       this.color = 'red';
       this.state = State.IDLE;
-      this.originalPos = null;
+      this.originalPos = {x: 0,
+      y: 0,
+      }
+      this.isChange=false;
       this.isDragging = false;
       this.isfollowing = false;
       this.lastTouch=null;
@@ -270,28 +274,28 @@ const State = {
     }
   
     handleMouseDown(event) {
-       
+    this.isChange=false;
     if(event.target.classList.contains("target")){
-          
+        var originalColor=this.element.style.backgroundColor;
+        console.log(originalColor);
       if (this.state === State.IDLE) {
         for (const div of divs) {
           div.setColor('red');
           div.setState(State.IDLE);
           console.log(this.state);
         }
+       
+        
+           
         
        
-        if(this.color=='red '&&this.state==State.DRAGGING){
-            this.setColor('red');
+        if( originalColor=='red'){
+            
             this.setState(State.SELECTED);
             console.log(this.state);
+            this.isChange=true;
         }
-        else if(this.color=='blue'&&this.state==State.DRAGGING){
-            this.setColor('blue');
-            this.setState(State.SELECTED);
-            console.log(this.state);
-        }
-        else{
+        if( originalColor=='blue'){
             this.setColor('blue');
             this.setState(State.SELECTED);
             console.log(this.state);
@@ -322,8 +326,12 @@ const State = {
         const dy = event.clientY - this.originalPos.y;
         this.element.style.top = `${this.originalPos.top + dy}px`;
         this.element.style.left = `${this.originalPos.left + dx}px`;
-
+        if(this.isChange==true &&dx==0 ){
+            this.setColor('blue');
+            this.isChange=false;
+        }
       }
+      
       if (this.state === State.FOLLOWING) {
         const dx = event.clientX - this.originalPos.x;
         const dy = event.clientY - this.originalPos.y;
@@ -425,8 +433,12 @@ const State = {
             console.log(x2);
             var newWidth = this.initialWidth + x2 - x1;
             console.log(this.initialWidth);
+            scalex=newWidth/this.initialWidth;
+            this.element.style.top=`50%`
+            this.element.style.left=`50%`
+            this.element.style.transform=`scaleX(${scalex})`
             this.element.style.width = newWidth + 'px';
-            this.element.style.left=this.element.offsetLeft+(x1-x2)/2;
+            //this.element.style.left=this.element.offsetLeft+(x1-x2)/2;
           }
         if (this.state == State.DRAGGING && event.touches.length == 1){
           const dx = event.touches[0].clientX - this.originalPos.x;
