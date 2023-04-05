@@ -175,7 +175,7 @@ const State = {
             this.x1 = event.touches[0].clientX;
             
             //initialWidth = parseInt(document.defaultView.getComputedStyle(resizeableDiv,null).getPropertyValue("width"));
-            console.log(x1);
+            console.log(this.x1);
           }   
         //document.body.addEventListener('touchmove', this.handleTouchMove.bind(this), { passive: false });
             if(event.touches.length==1 && this.state!=State.FOLLOWING){
@@ -207,10 +207,11 @@ const State = {
       handleTouchMove(event) {
         event.preventDefault();
         if (event.touches.length == 2 ) {
+            
             this.x2 = event.touches[1].clientX;
             console.log(this.x2);
             var newWidth = this.initialWidth + this.x2 - this.x1;
-            console.log(this.initialWidth);
+            //console.log(this.initialWidth);
             scalex=newWidth/this.initialWidth;
             this.element.style.top=`50%`
             this.element.style.left=`50%`
