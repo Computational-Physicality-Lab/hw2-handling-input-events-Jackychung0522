@@ -234,7 +234,7 @@ const State = {
     
       handleTouchMove(event) {
         event.preventDefault();
-        if (event.touches.length == 2 && this.state!=State.DRAGGING) {
+        if (event.touches.length == 2 && this.state==State.RESIZE) {
             this.x2 = event.touches[1].clientX;
             this.initialWidth=parseInt(this.element.style.width.match(/\d+/));
             console.log("initialWidth"+this.initialWidth);
