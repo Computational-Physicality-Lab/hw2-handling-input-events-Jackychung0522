@@ -299,7 +299,7 @@ const State = {
             console.log(event.touches.length);
             //this.lastScalex=this.scalex;
             console.log("lsatS:"+this.lastScalex);
-            
+            return;
             //console.log("two");
                         //this.setColor('red');
           }
