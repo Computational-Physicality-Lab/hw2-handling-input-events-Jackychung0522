@@ -33,6 +33,7 @@ const State = {
       this.initialDistance=0;
       this.x1=0;
       this.x2=0;
+      this.scalex=1;
       element.addEventListener('mousedown', this.handleMouseDown.bind(this));
         element.addEventListener('mousemove', this.handleMouseMove.bind(this));
         element.addEventListener('mouseup', this.handleMouseUp.bind(this));
@@ -215,10 +216,11 @@ const State = {
             console.log("X2"+this.x2);
             var newWidth = this.initialWidth + this.x2 - this.x1;
             //console.log(this.initialWidth);
-            scalex=newWidth/this.initialWidth;
+            this.scalex=newWidth/this.initialWidth;
+            console.log("scalex:"+this.scalex);
             this.element.style.top=`50%`
             this.element.style.left=`50%`
-            this.element.style.transform=`scaleX(${scalex})`
+            this.element.style.transform=`scaleX(${this.scalex})`
             //this.element.style.width = newWidth + 'px';
             //this.element.style.left=this.element.offsetLeft+(x1-x2)/2;
           }
