@@ -286,13 +286,13 @@ const State = {
             this.setState(State.IDLE);
             this.element.style.transform=`scaleX(${this.lastScalex})`;
             console.log(event.touches.length);
-            
+            this.lastScalex=this.scalex;
+            console.log("lsatS:"+this.lastScalex);
             
             //console.log("two");
                         //this.setColor('red');
           }
-          this.lastScalex=this.scalex;
-          console.log("lsatS:"+this.lastScalex);
+          
       }
       
       handleTouchEnd(event) {
@@ -304,6 +304,8 @@ const State = {
         }
         if(this.state==State.RESIZE && event.touches.length < 2){
             this.state=State.IDLE;
+            this.lastScalex=this.scalex;
+            console.log("lsatS:"+this.lastScalex);
             //this.element.style.width=this.element.style.width*this.scalex;
             console.log(this.state);
         }
