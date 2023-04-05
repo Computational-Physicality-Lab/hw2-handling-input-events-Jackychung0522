@@ -207,7 +207,7 @@ const State = {
             this.setState(State.IDLE);
         }
         //document.body.addEventListener('touchmove', this.handleTouchMove.bind(this), { passive: false });
-            if(event.touches.length==1 ){
+            if(event.touches.length==1 && this.state!=State.FOLLOWING){
                 this.lastTouch = event.touches[0];
                 if (this.state === State.IDLE) {
                     for (const div of divs) {
@@ -262,8 +262,8 @@ const State = {
           }
         if (this.state == State.DRAGGING && event.touches.length ==1){
             this.isChange=false;
-        var dx=0;
-        var dy=0; 
+            var dx=0;
+            var dy=0; 
           dx = event.touches[0].clientX - this.originalPos.x;
           dy = event.touches[0].clientY - this.originalPos.y;
           this.element.style.top = `${this.originalPos.top + dy}px`;
@@ -293,7 +293,7 @@ const State = {
       
       handleTouchEnd(event) {
         event.preventDefault();
-        if (this.state === State.DRAGGING) {
+        if (this.state == State.DRAGGING) {
             if(!this.isChange){
                 
                 for (const div of divs) {
@@ -302,7 +302,7 @@ const State = {
                       div.setState(State.IDLE);
                       
                   }
-                  this.setColor("blue");
+                this.setColor("blue");
                 this.setState(State.SELECTED);
             }
             else{
@@ -319,6 +319,9 @@ const State = {
                 }
               
             }
+          //window.removeEventListener('mousemove', this.handleMouseMove.bind(this));
+          //window.removeEventListener('mouseup', this.handleMouseUp.bind(this));
+        }
         if (event.touches.length >=3 && (this.state == State.RESIZE ) ){ 
             this.setState(State.IDLE);
             this.element.style.transform=`scaleX(1)`;
