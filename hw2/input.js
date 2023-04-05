@@ -297,7 +297,7 @@ const State = {
             this.setState(State.IDLE);
             this.element.style.transform=`scaleX(${this.lastScalex})`;
             console.log(event.touches.length);
-            this.lastScalex=this.scalex;
+            //this.lastScalex=this.scalex;
             console.log("lsatS:"+this.lastScalex);
             
             //console.log("two");
