@@ -200,7 +200,7 @@ const State = {
            
             console.log(this.state);
             //initialWidth = parseInt(document.defaultView.getComputedStyle(resizeableDiv,null).getPropertyValue("width"));
-            console.log(this.x1);
+            //console.log(this.x1);
           }   
           else {
             this.setState(State.IDLE);
@@ -238,7 +238,7 @@ const State = {
         if (event.touches.length == 2 && this.state==State.RESIZE) {
             this.x2 = event.touches[1].clientX;
             this.initialWidth=parseInt(this.element.style.width.match(/\d+/));
-            console.log("initialWidth"+this.initialWidth);
+            //console.log("initialWidth"+this.initialWidth);
             // this.x1 = event.touches[0].clientX;
             // this.x2 = event.touches[1].clientX;
             // console.log("X1"+this.x1);
