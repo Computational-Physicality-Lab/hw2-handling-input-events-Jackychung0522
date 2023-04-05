@@ -208,11 +208,11 @@ const State = {
         event.preventDefault();
         if (event.touches.length == 2 && this.state=＝State.RESIZE) {
             this.initialWidth=this.element.style.width;
-            console.log(this.initialWidth);
+            console.log("initialWidth"+this.initialWidth);
             this.x1 = event.touches[0].clientX;
             this.x2 = event.touches[1].clientX;
-            console.log(this.x1);
-            console.log(this.x2);
+            console.log("X1"+this.x1);
+            console.log("X2"+this.x2);
             var newWidth = this.initialWidth + this.x2 - this.x1;
             //console.log(this.initialWidth);
             scalex=newWidth/this.initialWidth;
