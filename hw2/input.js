@@ -270,6 +270,7 @@ const State = {
           this.element.style.left = `${this.originalPos.left + dx}px`;
             if(dx!=0 ||dy!=0){
                 this.isChange=true;
+                console.log(this.isChange);
             }
         }
         else if(this.state == State.FOLLOWING ){
