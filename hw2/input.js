@@ -181,7 +181,7 @@ const State = {
         const now = new Date().getTime();
         if(now-this.lastTap<300){
             this.setState(State.FOLLOWING);
-            this.isfollowing=true;
+            this.isFollowing=true;
             this.originalPos = {
                 x: event.touches[0].clientX - this.element.offsetWidth / 2 ,
                 y: event.touches[0].clientY - this.element.offsetWidth / 2,
@@ -251,8 +251,8 @@ const State = {
             console.log("scalex:"+this.scalex);
             //this.element.style.top=`50%`
             //this.element.style.left=`50%`
-            this.element.style.top = `${this.originalPos.top }px`;
-            this.element.style.left = `${this.originalPos.left }px`;
+            //this.element.style.top = `${this.originalPos.top }px`;
+            //this.element.style.left = `${this.originalPos.left }px`;
             this.element.style.transform=`scaleX(${this.scalex})`
             //this.element.style.width = newWidth + 'px';
             //this.element.style.left=this.element.offsetLeft+(x1-x2)/2;
