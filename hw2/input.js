@@ -198,7 +198,7 @@ const State = {
             this.setState(State.RESIZE);
             this.x1 = event.touches[0].clientX;
            
-            
+            console.log(this.state);
             //initialWidth = parseInt(document.defaultView.getComputedStyle(resizeableDiv,null).getPropertyValue("width"));
             console.log(this.x1);
           }   
