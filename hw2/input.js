@@ -244,7 +244,7 @@ const State = {
             // this.x2 = event.touches[1].clientX;
             // console.log("X1"+this.x1);
             // console.log("X2"+this.x2);
-            var newWidth = this.initialWidth+this.x2 - this.x1;
+            var newWidth = this.initialWidth+this.x1 - this.x2;
             
             //console.log(this.initialWidth);
             this.scalex=newWidth/this.initialWidth;
@@ -282,7 +282,15 @@ const State = {
             //console.log("two");
                         //this.setColor('red');
           }
-          
+          else if (event.touches.length >=3 && (this.state == State.RESIZE ) ){ 
+            this.setState(State.IDLE);
+            this.element.style.transform=`scaleX(${this.lastScalex})`;
+            console.log(event.touches.length);
+            this.lastScalex=this.scalex;
+            console.log("lsatS:"+this.lastScalex);
+            //console.log("two");
+                        //this.setColor('red');
+          }
       }
       
       handleTouchEnd(event) {
@@ -297,15 +305,7 @@ const State = {
             //this.element.style.width=this.element.style.width*this.scalex;
             console.log(this.state);
         }
-        else if (event.touches.length >=3 && (this.state == State.RESIZE ) ){ 
-            this.setState(State.IDLE);
-            this.element.style.transform=`scaleX(${this.lastScalex})`;
-            console.log(event.touches.length);
-            this.lastScalex=this.scalex;
-            console.log("lsatS:"+this.lastScalex);
-            //console.log("two");
-                        //this.setColor('red');
-          }
+        
         
         if (this.state == State.FOLLOWING) {
             this.isFollowing = false;
