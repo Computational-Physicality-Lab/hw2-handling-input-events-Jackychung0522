@@ -173,11 +173,15 @@ const State = {
         this.lastTap = now;
         if (event.touches.length == 2 ) {
             this.setState(State.RESIZE);
-            
+            this.x1 = event.touches[0].clientX;
+            this.x2 = event.touches[1].clientX;
             
             //initialWidth = parseInt(document.defaultView.getComputedStyle(resizeableDiv,null).getPropertyValue("width"));
             console.log(this.x1);
           }   
+          else {
+            this.setState(State.IDLE);
+        }
         //document.body.addEventListener('touchmove', this.handleTouchMove.bind(this), { passive: false });
             if(event.touches.length==1 && this.state!=State.FOLLOWING){
                 this.lastTouch = event.touches[0];
@@ -210,16 +214,17 @@ const State = {
         if (event.touches.length == 2 && this.state==State.RESIZE) {
             this.initialWidth=parseInt(this.element.style.width.match(/\d+/));
             console.log("initialWidth"+this.initialWidth);
-            this.x1 = event.touches[0].clientX;
-            this.x2 = event.touches[1].clientX;
-            console.log("X1"+this.x1);
-            console.log("X2"+this.x2);
+            // this.x1 = event.touches[0].clientX;
+            // this.x2 = event.touches[1].clientX;
+            // console.log("X1"+this.x1);
+            // console.log("X2"+this.x2);
             var newWidth = this.initialWidth + this.x2 - this.x1;
             //console.log(this.initialWidth);
             this.scalex=newWidth/this.initialWidth;
             console.log("scalex:"+this.scalex);
-            this.element.style.top=`50%`
-            this.element.style.left=`50%`
+            //this.element.style.top=`50%`
+            //this.element.style.left=`50%`
+            
             this.element.style.transform=`scaleX(${this.scalex})`
             //this.element.style.width = newWidth + 'px';
             //this.element.style.left=this.element.offsetLeft+(x1-x2)/2;
@@ -257,7 +262,7 @@ const State = {
         }
         if(this.state==State.RESIZE && event.touches.length < 2){
             this.state=State.IDLE;
-            this.initialWidth=parseInt(this.element.style.width.match(/\d+/));
+            this.initialWidth=this.element.style.width;
             console.log(this.state);
         }
         
