@@ -53,61 +53,62 @@ const State = {
     }
   
     handleMouseDown(event) {
+       var  wait=false;
+    for(const div of divs) {
+        if(div.isFollowing==true){
+            wait=true;
+            break;
+        }
+    }
+    console.log(wait);
     this.isChange=false;
-    if(event.target.classList.contains("target")){
-        var originalColor=this.element.style.backgroundColor;
-        console.log(originalColor);
-      if (this.state === State.IDLE) {
-        for (const div of divs) {
-          div.setColor('red');
-          div.setState(State.IDLE);
-          console.log(this.state);
+    if(wait==false){
+        if(event.target.classList.contains("target")){
+            var originalColor=this.element.style.backgroundColor;
+            console.log(originalColor);
+        if (this.state === State.IDLE) {
+            for (const div of divs) {
+            if(div.state==State.IDLE){
+                div.setColor('red');
+                div.setState(State.IDLE);
+                console.log(this.state);
+                }
+            }
+        
         }
-       
-        
-           
-        
-       
-        if( originalColor=='red'){
+        if (event.target === this.element) {
+            this.isDragging = true;
+            this.originalPos = {
+            x: event.clientX,
+            y: event.clientY,
+            top: this.element.offsetTop,
+            left: this.element.offsetLeft,
+            };
+                this.setState(State.DRAGGING);
             
-            this.setState(State.SELECTED);
             console.log(this.state);
-            this.isChange=true;
+            //element.addEventListener('click', this.handleClick.bind(this));
+        
         }
-        if( originalColor=='blue'){
-            this.setColor('blue');
-            this.setState(State.SELECTED);
-            console.log(this.state);
-        }
-      }
-      if (event.target === this.element) {
-        this.isDragging = true;
-        this.originalPos = {
-          x: event.clientX,
-          y: event.clientY,
-          top: this.element.offsetTop,
-          left: this.element.offsetLeft,
-        };
-        this.setState(State.DRAGGING);
-        console.log(this.state);
-        //element.addEventListener('click', this.handleClick.bind(this));
-    
-      }
+        
     }
     
-
+    }
     
     
 }
     handleMouseMove(event) {
       if (this.state === State.DRAGGING) {
-        const dx = event.clientX - this.originalPos.x;
-        const dy = event.clientY - this.originalPos.y;
+        this.isChange=false;
+        var dx=0;
+        var dy=0;
+        dx = event.clientX - this.originalPos.x;
+        dy = event.clientY - this.originalPos.y;
         this.element.style.top = `${this.originalPos.top + dy}px`;
         this.element.style.left = `${this.originalPos.left + dx}px`;
-        if(this.isChange==true &&dx==0 ){
-            this.setColor('blue');
-            this.isChange=false;
+        if(dx!=0 || dy !=0){
+            
+            this.isChange=true;
         }
       }
       
@@ -121,9 +122,31 @@ const State = {
   
     handleMouseUp(event) {
       if (this.state === State.DRAGGING) {
-        this.isDragging = false;
-        this.setState(State.IDLE);
-        console.log(this.state);
+          if(!this.isChange){
+              
+              for (const div of divs) {
+                
+                    div.setColor('red');
+                    div.setState(State.IDLE);
+                    
+                }
+                this.setColor("blue");
+              this.setState(State.SELECTED);
+          }
+          else{
+              if(this.element.style.backgroundColor!='blue'){
+                this.isDragging = false;
+                this.setState(State.IDLE);
+                console.log(this.state);
+              }
+              else{
+                this.setColor("blue");
+                this.isDragging = false;
+                this.setState(State.IDLE);
+                console.log(this.state);
+              }
+            
+          }
         //window.removeEventListener('mousemove', this.handleMouseMove.bind(this));
         //window.removeEventListener('mouseup', this.handleMouseUp.bind(this));
       }
@@ -218,12 +241,13 @@ const State = {
             // this.x2 = event.touches[1].clientX;
             // console.log("X1"+this.x1);
             // console.log("X2"+this.x2);
-            var newWidth = this.x2 - this.x1;
-            if(newWidth<30){
-                newWidth=30;
-            }
+            var newWidth = this.initialWidth+this.x2 - this.x1;
+            
             //console.log(this.initialWidth);
             this.scalex=newWidth/this.initialWidth;
+            if(this.scalex<=0.3){
+                this.scalex=0.3;
+            }
             console.log("scalex:"+this.scalex);
             //this.element.style.top=`50%`
             //this.element.style.left=`50%`
