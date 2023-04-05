@@ -239,26 +239,26 @@ const State = {
         if (event.touches.length == 2 ) {
             for(const div of divs){
                 if(div.element.style.backgroundColor=='blue'){
-                    this.x2 = event.touches[1].clientX;
-                    this.initialWidth=parseInt(this.element.style.width.match(/\d+/));
+                    div.x2 = event.touches[1].clientX;
+                    div.initialWidth=parseInt(div.element.style.width.match(/\d+/));
                     //console.log("initialWidth"+this.initialWidth);
                     // this.x1 = event.touches[0].clientX;
                     // this.x2 = event.touches[1].clientX;
                     // console.log("X1"+this.x1);
                     // console.log("X2"+this.x2);
-                    var newWidth = this.initialWidth+this.x1 - this.x2;
+                    var newWidth = div.initialWidth+div.x1 - div.x2;
                     
                     //console.log(this.initialWidth);
-                    this.scalex=newWidth/this.initialWidth;
-                    if(this.scalex<=0.3){
-                        this.scalex=0.3;
+                    div.scalex=newWidth/div.initialWidth;
+                    if(div.scalex<=0.3){
+                        div.scalex=0.3;
                     }
-                    console.log("scalex:"+this.scalex);
+                    console.log("scalex:"+div.scalex);
                     //this.element.style.top=`50%`
                     //this.element.style.left=`50%`
                     //this.element.style.top = `${this.originalPos.top }px`;
                     //this.element.style.left = `${this.originalPos.left }px`;
-                    this.element.style.transform=`scaleX(${this.scalex})`
+                    div.element.style.transform=`scaleX(${div.scalex})`
                     //this.element.style.width = newWidth + 'px';
                     //this.element.style.left=this.element.offsetLeft+(x1-x2)/2;
                 }
