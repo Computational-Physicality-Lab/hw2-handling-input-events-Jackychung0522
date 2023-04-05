@@ -178,7 +178,7 @@ const State = {
       }
       handleTouchStart(event) {
         event.preventDefault();
-        this.lastScalex=this.scalex;
+        
         const now = new Date().getTime();
         if(now-this.lastTap<300){
             this.setState(State.FOLLOWING);
@@ -299,10 +299,10 @@ const State = {
         }
         else if (event.touches.length >=3 && (this.state == State.RESIZE ) ){ 
             this.setState(State.IDLE);
-            this.scalex=1;
             this.element.style.transform=`scaleX(${this.lastScalex})`;
             console.log(event.touches.length);
-            
+            this.lastScalex=this.scalex;
+            console.log("lsatS:"+this.lastScalex);
             //console.log("two");
                         //this.setColor('red');
           }
