@@ -208,7 +208,7 @@ const State = {
         event.preventDefault();
         if (event.touches.length == 2 ) {
             this.x2 = event.touches[1].clientX;
-            console.log(x2);
+            console.log(this.x2);
             var newWidth = this.initialWidth + this.x2 - this.x1;
             console.log(this.initialWidth);
             scalex=newWidth/this.initialWidth;
