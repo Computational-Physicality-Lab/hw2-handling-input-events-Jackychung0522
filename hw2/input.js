@@ -143,7 +143,7 @@ const State = {
               else{
                 this.setColor("blue");
                 this.isDragging = false;
-                this.setState(State.IDLE);
+                this.setState(State.SELECTED);
                 console.log(this.state);
               }
             
@@ -295,11 +295,11 @@ const State = {
         }
         if (event.touches.length >=3 && (this.state == State.RESIZE ) ){ 
             this.setState(State.IDLE);
-            this.element.style.transform=`scaleX(${this.lastScalex})`;
+            this.element.style.transform=`scaleX(1)`;
             console.log(event.touches.length);
             //this.lastScalex=this.scalex;
             console.log("lsatS:"+this.lastScalex);
-            return;
+            
             //console.log("two");
                         //this.setColor('red');
           }
