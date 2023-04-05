@@ -218,7 +218,10 @@ const State = {
             // this.x2 = event.touches[1].clientX;
             // console.log("X1"+this.x1);
             // console.log("X2"+this.x2);
-            var newWidth = this.initialWidth + this.x2 - this.x1;
+            var newWidth = this.x2 - this.x1;
+            if(newWidth<30){
+                newWidth=30;
+            }
             //console.log(this.initialWidth);
             this.scalex=newWidth/this.initialWidth;
             console.log("scalex:"+this.scalex);
@@ -237,12 +240,12 @@ const State = {
           this.element.style.left = `${this.originalPos.left + dx}px`;
 
         }
-        // else if(this.state == State.FOLLOWING ){
-        //     const dx = event.touches[0].clientX- this.originalPos.x;
-        //     const dy = event.touches[0].clientY- this.originalPos.y;
-        //     this.element.style.top = event.touches[0].clientY - this.element.offsetHeight / 2 + "px";
-        //     this.element.style.left = event.touches[0].clientX - this.element.offsetWidth / 2 + "px";
-        // }
+        else if(this.state == State.FOLLOWING ){
+            const dx = event.touches[0].clientX- this.originalPos.x;
+            const dy = event.touches[0].clientY- this.originalPos.y;
+            this.element.style.top = event.touches[0].clientY - this.element.offsetHeight / 2 + "px";
+            this.element.style.left = event.touches[0].clientX - this.element.offsetWidth / 2 + "px";
+        }
         else if (event.touches.length > 1 && (this.state == State.DRAGGING ) ){ 
             this.isDragging = false;
             this.following=false;
@@ -263,16 +266,20 @@ const State = {
         }
         if(this.state==State.RESIZE && event.touches.length < 2){
             this.state=State.IDLE;
-            this.element.style.width=this.element.style.width*this.scalex;
+            //this.element.style.width=this.element.style.width*this.scalex;
             console.log(this.state);
         }
         
-        // if (this.state == State.FOLLOWING) {
-        //     this.isFollowing = false;
-        //     this.setState(State.IDLE);
-        //     console.log(this.state);
-        //   }
-        //document.body.removeEventListener('touchmove', this.handleTouchMove.bind(this), { passive: false });
+        if (this.state == State.FOLLOWING) {
+            this.isFollowing = false;
+            this.setState(State.IDLE);
+            console.log(this.state);
+            const dx = event.touches[0].clientX- this.originalPos.x;
+            const dy = event.touches[0].clientY- this.originalPos.y;
+            this.element.style.top = event.touches[0].clientY - this.element.offsetHeight / 2 + "px";
+            this.element.style.left = event.touches[0].clientX - this.element.offsetWidth / 2 + "px";
+          }
+        document.body.removeEventListener('touchmove', this.handleTouchMove.bind(this), { passive: false });
       }
     }
   
