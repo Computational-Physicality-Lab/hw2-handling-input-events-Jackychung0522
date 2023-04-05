@@ -287,11 +287,12 @@ const State = {
             this.element.style.transform=`scaleX(${this.lastScalex})`;
             console.log(event.touches.length);
             
-            console.log("lsatS:"+this.lastScalex);
+            
             //console.log("two");
                         //this.setColor('red');
           }
           this.lastScalex=this.scalex;
+          console.log("lsatS:"+this.lastScalex);
       }
       
       handleTouchEnd(event) {
