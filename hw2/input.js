@@ -224,7 +224,8 @@ const State = {
             console.log("scalex:"+this.scalex);
             //this.element.style.top=`50%`
             //this.element.style.left=`50%`
-            
+            this.element.style.top = `${this.originalPos.top }px`;
+            this.element.style.left = `${this.originalPos.left }px`;
             this.element.style.transform=`scaleX(${this.scalex})`
             //this.element.style.width = newWidth + 'px';
             //this.element.style.left=this.element.offsetLeft+(x1-x2)/2;
