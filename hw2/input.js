@@ -234,6 +234,7 @@ const State = {
     
       handleTouchMove(event) {
         event.preventDefault();
+        console.log(event.touches.length);
         if (event.touches.length == 2 && this.state==State.RESIZE) {
             this.x2 = event.touches[1].clientX;
             this.initialWidth=parseInt(this.element.style.width.match(/\d+/));
@@ -258,7 +259,7 @@ const State = {
             //this.element.style.width = newWidth + 'px';
             //this.element.style.left=this.element.offsetLeft+(x1-x2)/2;
           }
-        if (this.state == State.DRAGGING && event.touches.length == 1){
+        if (this.state == State.DRAGGING && event.touches.length ==1){
           const dx = event.touches[0].clientX - this.originalPos.x;
           const dy = event.touches[0].clientY - this.originalPos.y;
           this.element.style.top = `${this.originalPos.top + dy}px`;
