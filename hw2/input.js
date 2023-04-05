@@ -236,6 +236,7 @@ const State = {
       handleTouchMove(event) {
         event.preventDefault();
         console.log(event.touches.length);
+        if(this.state!=IDLE){
         if (event.touches.length == 2 && this.state==State.RESIZE) {
             this.x2 = event.touches[1].clientX;
             this.initialWidth=parseInt(this.element.style.width.match(/\d+/));
@@ -282,7 +283,7 @@ const State = {
             //console.log("two");
                         //this.setColor('red');
           }
-        
+        }
           
       }
       
