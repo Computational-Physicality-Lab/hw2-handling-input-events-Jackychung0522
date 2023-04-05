@@ -257,6 +257,8 @@ const State = {
         }
         if(this.state==State.RESIZE && event.touches.length < 2){
             this.state=State.IDLE;
+            this.initialWidth=parseInt(this.element.style.width.match(/\d+/));
+            console.log(this.state);
         }
         
         // if (this.state == State.FOLLOWING) {
