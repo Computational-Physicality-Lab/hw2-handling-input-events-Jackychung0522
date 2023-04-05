@@ -236,7 +236,6 @@ const State = {
       handleTouchMove(event) {
         event.preventDefault();
         console.log(event.touches.length);
-        if(this.state!=IDLE){
         if (event.touches.length == 2 && this.state==State.RESIZE) {
             this.x2 = event.touches[1].clientX;
             this.initialWidth=parseInt(this.element.style.width.match(/\d+/));
@@ -283,7 +282,7 @@ const State = {
             //console.log("two");
                         //this.setColor('red');
           }
-        }
+        
           
       }
       
@@ -296,7 +295,7 @@ const State = {
         }
         if (event.touches.length >=3 && (this.state == State.RESIZE ) ){ 
             this.setState(State.IDLE);
-            this.element.style.transform=`scaleX(1)`;
+            this.element.style.transform=`scaleX(${this.lastScalex})`;
             console.log(event.touches.length);
             //this.lastScalex=this.scalex;
             console.log("lsatS:"+this.lastScalex);
