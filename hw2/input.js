@@ -34,6 +34,7 @@ const State = {
       this.x1=0;
       this.x2=0;
       this.scalex=1;
+      this.lastScalex=1;
       element.addEventListener('mousedown', this.handleMouseDown.bind(this));
         element.addEventListener('mousemove', this.handleMouseMove.bind(this));
         element.addEventListener('mouseup', this.handleMouseUp.bind(this));
@@ -177,7 +178,7 @@ const State = {
       }
       handleTouchStart(event) {
         event.preventDefault();
-        
+        this.lastScalex=this.scalex;
         const now = new Date().getTime();
         if(now-this.lastTap<300){
             this.setState(State.FOLLOWING);
@@ -299,7 +300,7 @@ const State = {
         else if (event.touches.length >=3 && (this.state == State.RESIZE ) ){ 
             this.setState(State.IDLE);
             this.scalex=1;
-            this.element.style.transform=`scaleX(${this.scalex})`;
+            this.element.style.transform=`scaleX(${this.lastScalex})`;
             console.log(event.touches.length);
             
             //console.log("two");
