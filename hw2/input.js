@@ -7,236 +7,12 @@ You will certainly need a large number of global variables to keep track of the 
 of the interaction.
 */
 
-		
-		
-        
-		
-        // var divs=document.querySelectorAll(".target")
-        // var isMouseDown=false;
-        // let isDragging = false;
-        // let currentDraggable = null;
-        // function onMouseDown(event) {
-        //     if(event.detail==2){
-        //         isDragging=true;
-        //         currentDraggable=true;
-        //         var div = event.target;
-        //         var startX = event.clientX - div.offsetLeft;
-        //         var startY = event.clientY - div.offsetTop;
-        //         isMouseDown=true;
-        //         document.addEventListener("mousemove", onMouseMove);
-        //         document.addEventListener("mouseup", onMouseUp);
-        //     }
-        //     var div = event.target;
-        //     var startX = event.clientX - div.offsetLeft;
-        //     var startY = event.clientY - div.offsetTop;
-        //     isMouseDown=true;
-        //     document.addEventListener("mousemove", onMouseMove);
-        //     document.addEventListener("mouseup", onMouseUp);
-        //     function onMouseMove(event) {
-        //         if(isDragging){
-        //             event.preventDefault();
-        //             var newLeft = event.clientX - startX;
-        //             var newTop = event.clientY - startY;
-        //             div.style.left = newLeft + "px";
-        //             div.style.top = newTop + "px";
-        //         }
-        //         var newLeft = event.clientX - startX;
-        //         var newTop = event.clientY - startY;
-        //         div.style.left = newLeft + "px";
-        //         div.style.top = newTop + "px";
-        //     }
-        //     function onMouseUp(event) {
-        //         if(isDragging){
-        //             isDragging=false;
-        //             currentDraggable=null;
-        //             document.removeEventListener("mousemove", onMouseMove);
-        //             document.removeEventListener("mouseup", onMouseUp);
-        //         }
-        //         isMouseDown=false;
-        //         document.removeEventListener("mousemove", onMouseMove);
-        //         document.removeEventListener("mouseup", onMouseUp);
-                
-               
-        //     }
-            
-        // }
-        
-        // document.body.addEventListener("click", function() {
-			
-		// 	for (var j = 0; j < divs.length; j++) {
-		// 		divs[j].classList.remove("selected");
-		// 	}
-		// });
-		// for (var i = 0; i < divs.length; i++) {
-           
-		// 	divs[i].addEventListener("mousedown", onMouseDown);
-            
-        //     if(isMouseDown==false){
-
-            
-        //         divs[i].addEventListener("click", function(event) {
-        //             event:Event
-        //             event.stopPropagation();
-        //             for (var j = 0; j < divs.length; j++) {
-        //                 divs[j].classList.remove("selected");
-        //             }
-        //                 this.classList.add("selected");
-                    
-        //         })
-        //     }
-            
-		// }
-        
-// const targetElems = document.querySelectorAll('.target');
-// const workspace=document.querySelectorAll("#workspace");
-// let selectedTarget = null;
-// let isDragging = false;
-// let originalPos = null;
-// let lastSelectedTarget=null;
-// Define states
-// const State = {
-//   IDLE: 'idle',
-//   SELECTED: 'selected',
-//   DRAGGING: 'dragging',
-//   FOLLOW: 'follow',
-// //   BLUE:'blue',
-// //   RED:'red',
-// };
-// class Div {
-//     constructor(element) {
-//       this.element = element;
-//       this.color = 'red'; 
-//     }
-  
-//     setColor(color) {
-//       this.color = color;
-//       this.element.style.backgroundColor = color;
-//     }
-//   }
-  
-
-//   const divs = [];
-//   for (const target of targetElems) {
-//     const div = new Div(target);
-//     divs.push(div);
-//   }
-  
- 
-  
-  
-  
-  
-  
-
-// let currentState = State.IDLE;
-// let currentColor=State.RED;
-// let selectedDiv = null;
-
-// // Define event handlers
-// function handleMouseClick(event){
-//     const dx = event.clientX - originalPos.x;
-//     const dy = event.clientY - originalPos.y;
-   
-//     // if(!(selectedDiv.classList.contains("target")) ){
-//     // for(var j = 0; j < targetElems.length; j++) {
-//     //     targetElems[j].style.backgroundColor='red';
-//     //     lastSelectedTarget.style.backgroundColor ='red';
-//     //      currentColor=State.RED;
-//     // }
-    
-//     // }
-//     // if(selectedDiv.element.classList.contains("target")){
-//     //     if(dx==0 && dy==0 && selectedDiv){
-//     //         selectedDiv.setColor(blue);
-//     //         currentColor=State.BLUE;
-//     //     }
-        
-//     //     // if(currentColor==State.BLUE){
-//     //     //     selectedTarget.style.backgroundColor ='blue';
-//     //     // }
-//     // }
-//     if (currentState === State.SELECTED && selectedDiv) {
-//         selectedDiv.setColor('blue');
-//       }
-// }
-
-// function handleMouseDown(event) {
-    
-//         if (currentState == State.IDLE ) {
-//             selectedDiv = divs.find(div => div.element === event.target);
-//             currentState = State.SELECTED;
-//         }
-//         if (selectedDiv && event.target === selectedDiv.element &&event.target.classList.contains('target')) {
-//             isDragging = true;
-//             originalPos = {
-//             x: event.clientX,
-//             y: event.clientY,
-//             top: selectedDiv.element.offsetTop,
-//             left: selectedDiv.element.offsetLeft,
-//             };
-//             currentState = State.DRAGGING;
-//         }
-    
-// }
-
-// function handleMouseUp(event) {
-//   if (currentState === State.DRAGGING) {
-//     isDragging = false;
-//     currentState = State.SELECTED;
-//   }
-
-// }
-
-// function handleMouseMove(event) {
-//   if (currentState === State.DRAGGING) {
-//     const dx = event.clientX - originalPos.x;
-//     const dy = event.clientY - originalPos.y;
-//     selectedDiv.element.style.top = `${originalPos.top + dy}px`;
-//     selectedDiv.element.style.left = `${originalPos.left + dx}px`;
-//   }
-// //   if (currentState === State.FOLLOW) {
-// //     selectedTarget.style.top = `${event.clientY}px`;
-// //     selectedTarget.style.left = `${event.clientX}px`;
-// //   }
-// }
-
-// function handleKeyDown(event) {
-//   if (event.key === 'Escape' && currentState === State.DRAGGING) {
-//     selectedDiv.element.style.top = `${originalPos.top}px`;
-//     selectedDiv.element.style.left = `${originalPos.left}px`;
-//     currentState = State.SELECTED;
-//   }
-// }
-
-// function handleBodyClick(event) {
-//   if (currentState === State.SELECTED) {
-//     selectedDiv.element.style.backgroundColor = '';
-//     currentState = State.IDLE;
-//     selectedDiv = null;
-//     currentColor=State.RED;
-//   }
-// }
-// function handleDoubleClick(event) {
-//     if (currentState === State.SELECTED && selectedTarget === event.target) {
-//       currentState = State.FOLLOW;
-//     }
-//   }
-  
-// Attach event listeners
-// document.body.addEventListener('mousedown', handleMouseDown);
-// document.body.addEventListener('mouseup', handleMouseUp);
-// document.body.addEventListener('mousemove', handleMouseMove);
-// document.body.addEventListener('keydown', handleKeyDown);
-// document.body.addEventListener('click', handleBodyClick);
-// document.body.addEventListener('click',handleMouseClick);
-//document.body.addEventListener('dblclick', handleDoubleClick);
-        // Attach event listeners
-      // Define state enumeration
 const State = {
     IDLE: 'idle',
     SELECTED: 'selected',
     DRAGGING: 'dragging',
     FOLLOWING: 'following',
+    RESIZE:'resize',
   };
   var x1,x2
   // Define Div class
@@ -255,6 +31,8 @@ const State = {
       this.lastTouch=null;
       this.lastTap = 0;
       this.initialDistance=0;
+      this.x1=0;
+      this.x2=0;
       element.addEventListener('mousedown', this.handleMouseDown.bind(this));
         element.addEventListener('mousemove', this.handleMouseMove.bind(this));
         element.addEventListener('mouseup', this.handleMouseUp.bind(this));
@@ -393,8 +171,8 @@ const State = {
     } 
         this.lastTap = now;
         if (event.touches.length == 2) {
-            
-            x1 = event.touches[0].clientX;
+            this.setState(State.RESIZE);
+            this.x1 = event.touches[0].clientX;
             
             //initialWidth = parseInt(document.defaultView.getComputedStyle(resizeableDiv,null).getPropertyValue("width"));
             console.log(x1);
@@ -428,8 +206,8 @@ const State = {
     
       handleTouchMove(event) {
         event.preventDefault();
-        if (event.touches.length == 2 &&this.element.initialWidth !== null) {
-            x2 = event.touches[1].clientX;
+        if (event.touches.length == 2 ) {
+            this.x2 = event.touches[1].clientX;
             console.log(x2);
             var newWidth = this.initialWidth + x2 - x1;
             console.log(this.initialWidth);
@@ -437,7 +215,7 @@ const State = {
             this.element.style.top=`50%`
             this.element.style.left=`50%`
             this.element.style.transform=`scaleX(${scalex})`
-            this.element.style.width = newWidth + 'px';
+            //this.element.style.width = newWidth + 'px';
             //this.element.style.left=this.element.offsetLeft+(x1-x2)/2;
           }
         if (this.state == State.DRAGGING && event.touches.length == 1){
@@ -471,8 +249,10 @@ const State = {
           this.setState(State.IDLE);
           console.log(this.state);
         }
+        if(this.state==State.RESIZE && event.touches.length < 2){
+            this.state=State.IDLE;
+        }
         
-        this.initialWidth = null;
         // if (this.state == State.FOLLOWING) {
         //     this.isFollowing = false;
         //     this.setState(State.IDLE);
