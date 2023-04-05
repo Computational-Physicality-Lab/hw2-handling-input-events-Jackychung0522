@@ -207,7 +207,7 @@ const State = {
             this.setState(State.IDLE);
         }
         //document.body.addEventListener('touchmove', this.handleTouchMove.bind(this), { passive: false });
-            if(event.touches.length==1 && this.state!=State.FOLLOWING){
+            if(event.touches.length==1 ){
                 this.lastTouch = event.touches[0];
                 if (this.state === State.IDLE) {
                     for (const div of divs) {
