@@ -281,6 +281,13 @@ const State = {
             //console.log("two");
                         //this.setColor('red');
           }
+          else if (event.touches.length >=3 && (this.state == State.RESIZE ) ){ 
+            
+            this.element.style.transform=`scaleX(1)`
+            this.setState(State.IDLE);
+            //console.log("two");
+                        //this.setColor('red');
+          }
       }
       
       handleTouchEnd(event) {
