@@ -208,7 +208,7 @@ const State = {
       handleTouchMove(event) {
         event.preventDefault();
         if (event.touches.length == 2 && this.state==State.RESIZE) {
-            
+            console.log("element:"+this.element);
             this.initialWidth=parseInt(getComputedStyle(this.element).getPropertyValue('width'));
             console.log("initialWidth"+this.initialWidth);
             this.x1 = event.touches[0].clientX;
