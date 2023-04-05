@@ -263,7 +263,7 @@ const State = {
         }
         if(this.state==State.RESIZE && event.touches.length < 2){
             this.state=State.IDLE;
-            this.initialWidth=this.element.style.width*this.scalex;
+            this.element.style.width=this.element.style.width*this.scalex;
             console.log(this.state);
         }
         
