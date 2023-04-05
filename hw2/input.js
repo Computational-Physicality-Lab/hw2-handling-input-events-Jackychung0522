@@ -282,7 +282,7 @@ const State = {
             //console.log("two");
                         //this.setColor('red');
           }
-          else if (event.touches.length >=3 && (this.state == State.RESIZE ) ){ 
+        if (event.touches.length >=3 && (this.state == State.RESIZE ) ){ 
             this.setState(State.IDLE);
             this.element.style.transform=`scaleX(${this.lastScalex})`;
             console.log(event.touches.length);
