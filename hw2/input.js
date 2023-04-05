@@ -242,7 +242,7 @@ const State = {
             // this.x2 = event.touches[1].clientX;
             // console.log("X1"+this.x1);
             // console.log("X2"+this.x2);
-            var newWidth = this.initialWidth+this.x2 - this.x1;
+            var newWidth = this.initialWidth+this.x1 - this.x2;
             
             //console.log(this.initialWidth);
             this.scalex=newWidth/this.initialWidth;
