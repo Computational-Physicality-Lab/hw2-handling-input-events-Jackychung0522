@@ -210,14 +210,14 @@ const State = {
             if(event.touches.length==1 && this.state!=State.FOLLOWING){
                 this.lastTouch = event.touches[0];
                 if (this.state === State.IDLE) {
-                    for (const div of divs) {
-                    if(div.state==State.IDLE){
-                        div.setColor('red');
-                        div.setState(State.IDLE);
-                        console.log(this.state);
-                        }
-                    }
-                
+                for (const div of divs) {
+                    div.setColor('red');
+                    div.setState(State.IDLE);
+                }
+            
+                this.setColor('blue');
+                this.setState(State.SELECTED);
+                console.log(this.state);
                 }
             
                 
@@ -237,41 +237,40 @@ const State = {
         event.preventDefault();
         console.log(event.touches.length);
         if (event.touches.length == 2 ) {
-            this.x2 = event.touches[1].clientX;
-            this.initialWidth=parseInt(this.element.style.width.match(/\d+/));
-            //console.log("initialWidth"+this.initialWidth);
-            // this.x1 = event.touches[0].clientX;
-            // this.x2 = event.touches[1].clientX;
-            // console.log("X1"+this.x1);
-            // console.log("X2"+this.x2);
-            var newWidth = this.initialWidth+this.x1 - this.x2;
-            
-            //console.log(this.initialWidth);
-            this.scalex=newWidth/this.initialWidth;
-            if(this.scalex<=0.3){
-                this.scalex=0.3;
+            for(const div of divs){
+                if(div.element.style.backgroundColor=='blue'){
+                    this.x2 = event.touches[1].clientX;
+                    this.initialWidth=parseInt(this.element.style.width.match(/\d+/));
+                    //console.log("initialWidth"+this.initialWidth);
+                    // this.x1 = event.touches[0].clientX;
+                    // this.x2 = event.touches[1].clientX;
+                    // console.log("X1"+this.x1);
+                    // console.log("X2"+this.x2);
+                    var newWidth = this.initialWidth+this.x1 - this.x2;
+                    
+                    //console.log(this.initialWidth);
+                    this.scalex=newWidth/this.initialWidth;
+                    if(this.scalex<=0.3){
+                        this.scalex=0.3;
+                    }
+                    console.log("scalex:"+this.scalex);
+                    //this.element.style.top=`50%`
+                    //this.element.style.left=`50%`
+                    //this.element.style.top = `${this.originalPos.top }px`;
+                    //this.element.style.left = `${this.originalPos.left }px`;
+                    this.element.style.transform=`scaleX(${this.scalex})`
+                    //this.element.style.width = newWidth + 'px';
+                    //this.element.style.left=this.element.offsetLeft+(x1-x2)/2;
+                }
             }
-            console.log("scalex:"+this.scalex);
-            //this.element.style.top=`50%`
-            //this.element.style.left=`50%`
-            //this.element.style.top = `${this.originalPos.top }px`;
-            //this.element.style.left = `${this.originalPos.left }px`;
-            this.element.style.transform=`scaleX(${this.scalex})`
-            //this.element.style.width = newWidth + 'px';
-            //this.element.style.left=this.element.offsetLeft+(x1-x2)/2;
+            
           }
         if (this.state == State.DRAGGING && event.touches.length ==1){
-            this.isChange=false;
-            var dx=0;
-            var dy=0; 
-          dx = event.touches[0].clientX - this.originalPos.x;
-          dy = event.touches[0].clientY - this.originalPos.y;
+          const dx = event.touches[0].clientX - this.originalPos.x;
+          const dy = event.touches[0].clientY - this.originalPos.y;
           this.element.style.top = `${this.originalPos.top + dy}px`;
           this.element.style.left = `${this.originalPos.left + dx}px`;
-            if(dx!=0 ||dy!=0){
-                this.isChange=true;
-                console.log(this.isChange);
-            }
+
         }
         else if(this.state == State.FOLLOWING ){
             const dx = event.touches[0].clientX- this.originalPos.x;
@@ -295,33 +294,9 @@ const State = {
       handleTouchEnd(event) {
         event.preventDefault();
         if (this.state == State.DRAGGING) {
-            if(!this.isChange){
-                
-                for (const div of divs) {
-                  
-                      div.setColor('red');
-                      div.setState(State.IDLE);
-                      
-                  }
-                this.setColor("blue");
-                this.setState(State.SELECTED);
-            }
-            else{
-                if(this.element.style.backgroundColor!='blue'){
-                  this.isDragging = false;
-                  this.setState(State.IDLE);
-                  console.log(this.state);
-                }
-                else{
-                  this.setColor("blue");
-                  this.isDragging = false;
-                  this.setState(State.SELECTED);
-                  console.log(this.state);
-                }
-              
-            }
-          //window.removeEventListener('mousemove', this.handleMouseMove.bind(this));
-          //window.removeEventListener('mouseup', this.handleMouseUp.bind(this));
+          this.isDragging = false;
+          this.setState(State.IDLE);
+          console.log(this.state);
         }
         if (event.touches.length >=3 && (this.state == State.RESIZE ) ){ 
             this.setState(State.IDLE);
