@@ -171,7 +171,7 @@ const State = {
            
     } 
         this.lastTap = now;
-        if (event.touches.length == 2 && this.state==IDLE) {
+        if (event.touches.length == 2 ) {
             this.setState(State.RESIZE);
             
             
